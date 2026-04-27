@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_REGION = 'ap-south-1'
-        ECR_REPO = '<your-ecr-uri>'
+        ECR_REPO = 'dkr.ecr.us-east-1.amazonaws.com/devops-realtime-repo'
         IMAGE_TAG = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
     }
 
@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: "${env.BRANCH_NAME}",
-                url: 'https://github.com/<username>/devops-realtime-project.git'
+                url: 'https://github.com/sravs994/devops-realtime-project.git'
             }
         }
 
