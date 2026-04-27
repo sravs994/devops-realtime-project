@@ -2,9 +2,10 @@ pipeline {
     agent { label 'dev' }
 
     environment {
-        AWS_REGION = 'ap-south-1'
-        ECR_REPO = 'dkr.ecr.us-east-1.amazonaws.com/devops-realtime-repo'
+        AWS_REGION = 'us-east-1'
+        ECR_REPO = '857481978652.dkr.ecr.us-east-1.amazonaws.com/devops-realtime-repo'
         IMAGE_TAG = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+        ECR_REGISTRY = '857481978652.dkr.ecr.us-east-1.amazonaws.com'
     }
 
     stages {
@@ -49,7 +50,8 @@ pipeline {
             steps {
                 sh '''
                 aws ecr get-login-password --region $AWS_REGION | \
-                docker login --username AWS --password-stdin $ECR_REPO
+                docker login --username AWS --password-stdin $ECR_REGISTRY
+
                 docker push $ECR_REPO:$IMAGE_TAG
                 '''
             }
