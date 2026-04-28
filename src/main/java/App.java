@@ -1,29 +1,20 @@
-import com.sun.net.httpserver.HttpServer;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpExchange;
-
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
+import java.io.*;
+import java.net.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
-
-        server.createContext("/", new HttpHandler() {
-            public void handle(HttpExchange exchange) {
-                try {
-                    String response = "Hello DevOps Running 🚀";
-                    exchange.sendResponseHeaders(200, response.length());
-                    OutputStream os = exchange.getResponseBody();
-                    os.write(response.getBytes());
-                    os.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        server.start();
+        ServerSocket server = new ServerSocket(8080);
         System.out.println("Server started on port 8080");
+
+        while (true) {
+            Socket socket = server.accept();
+            OutputStream out = socket.getOutputStream();
+
+            String response = "HTTP/1.1 200 OK\r\n\r\nHello DevOps Running 🚀";
+            out.write(response.getBytes());
+            out.flush();
+
+            socket.close();
+        }
     }
 }
