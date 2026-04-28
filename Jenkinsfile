@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO = '857481978652.dkr.ecr.us-east-1.amazonaws.com/devops-realtime-repo'
-        IMAGE_TAG = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+        IMAGE_TAG = "${env.BRANCH_NAME.replaceAll('/', '-')}-${env.BUILD_NUMBER}"
         ECR_REGISTRY = '857481978652.dkr.ecr.us-east-1.amazonaws.com'
     }
 
