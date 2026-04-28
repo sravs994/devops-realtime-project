@@ -1,5 +1,8 @@
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello DevOps! Build is successful 🚀");
+    public static void main(String[] args) throws Exception {
+        while(true) {
+            System.out.println("Hello DevOps Running...");
+            Thread.sleep(10000);
+        }
     }
 }
